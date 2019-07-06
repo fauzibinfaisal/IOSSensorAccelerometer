@@ -7,14 +7,49 @@
 //
 
 import UIKit
+import CoreMotion
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var textLabel: UILabel!
+    @IBOutlet weak var valueXLabel: UILabel!
+    @IBOutlet weak var valueYLabel: UILabel!
+    
+    //TODO 1: import CoreMotion and initialize it
+    let motionManager = CMMotionManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
+    
+    @IBAction func startAccelerometer(_ sender: UIButton) {
+        //TODO 2: Check if sensor is available
+        if motionManager.isAccelerometerAvailable{
+            
+            // TODO 3: Set interval sensor updated in second
+            motionManager.accelerometerUpdateInterval = 0.1
+            
+            // Todo 4: Start sensor and give an action every time interval
+            motionManager.startAccelerometerUpdates(to: OperationQueue.main) { (data, error) in
+                print("Accelerometer \(String(describing: data))")
+                
+                if ((data!.acceleration.x > 0.5)||(data!.acceleration.x < -0.5)){
+                    self.textLabel.text = "FAST"
+                }else{
+                    self.textLabel.text = "SLOW"
+                }
+                self.valueXLabel.text = String(format: "%.2f", (((data?.acceleration.x)!)))
 
-
+            }
+        }
+    }
+    
+    @IBAction func stopAccelerometer(_ sender: UIButton) {
+        // TODO 5: Stop Accelerometer
+        motionManager.stopAccelerometerUpdates()
+        
+        
+    }
+    
 }
 
