@@ -13,7 +13,6 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var valueXLabel: UILabel!
-    @IBOutlet weak var valueYLabel: UILabel!
     
     //TODO 1: import CoreMotion and initialize it
     let motionManager = CMMotionManager()
@@ -33,10 +32,12 @@ class ViewController: UIViewController {
             motionManager.startAccelerometerUpdates(to: OperationQueue.main) { (data, error) in
                 print("Accelerometer \(String(describing: data))")
                 
-                if ((data!.acceleration.x > 0.5)||(data!.acceleration.x < -0.5)){
-                    self.textLabel.text = "FAST"
+                if ((data!.acceleration.x > 0.5)){
+                    self.textLabel.text = "I'm moving FASTER to the RIGHT!"
+                }else if (data!.acceleration.x < -0.5){
+                    self.textLabel.text = "I'm moving FASTER to the LEFT!"
                 }else{
-                    self.textLabel.text = "SLOW"
+                    self.textLabel.text = "I'm moving SLOW"
                 }
                 self.valueXLabel.text = String(format: "%.2f", (((data?.acceleration.x)!)))
 
