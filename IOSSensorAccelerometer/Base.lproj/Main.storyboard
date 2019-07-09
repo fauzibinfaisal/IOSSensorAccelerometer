@@ -18,6 +18,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yct-TK-6wu">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="ZeC-Lx-z2n">
                                 <rect key="frame" x="115" y="348.5" width="184" height="199.5"/>
                                 <subviews>
@@ -65,12 +69,17 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="yct-TK-6wu" secondAttribute="bottom" id="7gq-Pz-YTA"/>
                             <constraint firstItem="ZeC-Lx-z2n" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Lnh-7z-b02"/>
+                            <constraint firstItem="yct-TK-6wu" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Qfa-TA-Sv9"/>
+                            <constraint firstItem="yct-TK-6wu" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Stl-r7-cad"/>
                             <constraint firstItem="ZeC-Lx-z2n" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="weX-bC-EtL"/>
+                            <constraint firstItem="yct-TK-6wu" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="wr7-KI-bQV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="backgroundView" destination="yct-TK-6wu" id="40O-BH-Fsm"/>
                         <outlet property="textLabel" destination="nEp-4L-PA6" id="jwH-yb-H1e"/>
                         <outlet property="valueXLabel" destination="sD0-II-pDp" id="tHN-xi-RqS"/>
                     </connections>

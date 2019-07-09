@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var textLabel: UILabel!
     @IBOutlet weak var valueXLabel: UILabel!
+    @IBOutlet weak var backgroundView: UIView!
     
     //TODO 1: import CoreMotion and initialize it
     let motionManager = CMMotionManager()
@@ -24,7 +25,6 @@ class ViewController: UIViewController {
     @IBAction func startAccelerometer(_ sender: UIButton) {
         //TODO 2: Check if sensor is available
         if motionManager.isAccelerometerAvailable{
-            
             // TODO 3: Set interval sensor updated in second
             motionManager.accelerometerUpdateInterval = 0.1
             
@@ -32,12 +32,16 @@ class ViewController: UIViewController {
             motionManager.startAccelerometerUpdates(to: OperationQueue.main) { (data, error) in
                 print("Accelerometer \(String(describing: data))")
                 
-                if ((data!.acceleration.x > 0.5)){
+                if ((data!.acceleration.x > 0.1)){
                     self.textLabel.text = "I'm moving FASTER to the RIGHT!"
-                }else if (data!.acceleration.x < -0.5){
+                    self.backgroundView.backgroundColor = UIColor(red: 0/255, green: 255/255, blue: 0/255, alpha: CGFloat(data!.acceleration.x))
+                    
+                }else if (data!.acceleration.x < -0.1){
                     self.textLabel.text = "I'm moving FASTER to the LEFT!"
+                    self.backgroundView.backgroundColor = UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: CGFloat(data!.acceleration.x))
                 }else{
                     self.textLabel.text = "I'm moving SLOW"
+                        self.backgroundView.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha:0)
                 }
                 self.valueXLabel.text = String(format: "%.2f", (((data?.acceleration.x)!)))
 
