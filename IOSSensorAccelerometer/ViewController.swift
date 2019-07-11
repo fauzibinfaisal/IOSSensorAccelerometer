@@ -46,9 +46,6 @@ class ViewController: UIViewController {
                     }
                     self.valueXLabel.text = String(format: "%.2f", (((data?.acceleration.x)!)))
                 }
-                
-                
-
 
             }
         }
