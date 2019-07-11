@@ -30,20 +30,25 @@ class ViewController: UIViewController {
             
             // Todo 4: Start sensor and give an action every time interval
             motionManager.startAccelerometerUpdates(to: OperationQueue.main) { (data, error) in
-                print("Accelerometer \(String(describing: data))")
-                
-                if ((data!.acceleration.x > 0.1)){
-                    self.textLabel.text = "I'm moving FASTER to the RIGHT!"
-                    self.backgroundView.backgroundColor = UIColor(red: 0/255, green: 255/255, blue: 0/255, alpha: CGFloat(data!.acceleration.x))
+                if let dataAccel = data {
+                  print(dataAccel)
                     
-                }else if (data!.acceleration.x < -0.1){
-                    self.textLabel.text = "I'm moving FASTER to the LEFT!"
-                    self.backgroundView.backgroundColor = UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: CGFloat(data!.acceleration.x))
-                }else{
-                    self.textLabel.text = "I'm moving SLOW"
+                    if ((dataAccel.acceleration.x > 0.1)){
+                        self.textLabel.text = "I'm moving FASTER to the RIGHT!"
+                        self.backgroundView.backgroundColor = UIColor(red: 0/255, green: 255/255, blue: 0/255, alpha: CGFloat(dataAccel.acceleration.x))
+                        
+                    }else if (dataAccel.acceleration.x < -0.1){
+                        self.textLabel.text = "I'm moving FASTER to the LEFT!"
+                        self.backgroundView.backgroundColor = UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: CGFloat(abs(dataAccel.acceleration.x)))
+                    }else{
+                        self.textLabel.text = "I'm moving SLOW"
                         self.backgroundView.backgroundColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha:0)
+                    }
+                    self.valueXLabel.text = String(format: "%.2f", (((data?.acceleration.x)!)))
                 }
-                self.valueXLabel.text = String(format: "%.2f", (((data?.acceleration.x)!)))
+                
+                
+
 
             }
         }
